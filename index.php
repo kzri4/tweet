@@ -5,7 +5,7 @@ require_once('functions.php');
 
 $dbh = connectDb();
 
-$sql = 'SELECT * FROM tweets';
+$sql = 'SELECT * FROM tweets order by created_at desc';
 $stmt = $dbh->prepare($sql);
 $stmt->execute();
 
@@ -64,9 +64,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <ul class = "tweet-list">
             <?php foreach ($tweets as $tweet) : ?>
                 <ul>
-                    <?= h($tweet['content']) ?><br>
+                    <a href="show.php?id=<?= h($tweets['id']) ?>"><?= h($tweet['content']) ?></a><br>
                     投稿日時:<?=h($tweet['created_at']) ?>
-                    
+                <?php if ($tweet['good']) : ?>   
+                    <a href="good.php?id=<?= h($tweet['id']) ?>&good=0" class="good-list">★</a>
+                <?php else : ?>
+                    <a href="good.php?id=<?= h($tweet['id']) ?>&good=1" class="good-list">☆</a>
+                <?php endif; ?>
                     <hr>
                 </ul>
             <?php endforeach; ?>
