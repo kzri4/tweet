@@ -19,7 +19,6 @@ if (!$tweets) {
 }
 ?>
 
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,13 +35,13 @@ if (!$tweets) {
             [#<?= h($tweets['id']) ?>]
             <?= h($tweets['content']) ?><br>
             投稿日時: <?= h($tweets['created_at']) ?>
-            <?php if ($tweet['good']) : ?>
-                <a href="good.php?id=<?= h($tweet['id']) ?>&good=0" class="good-list">★</a>
+            <?php if ($tweets['good']) : ?>
+                <a href="good.php?id=<?= h($tweets['id']) ?>&good=0" class="good-list">★</a>
             <?php else : ?>
-                <a href="good.php?id=<?= h($tweet['id']) ?>&good=1" class="good-list">☆</a>
+                <a href="good.php?id=<?= h($tweets['id']) ?>&good=1" class="good-list">☆</a>
             <?php endif; ?>
-            <a href="edit.php?id=<?= h($tweet['id']) ?>">[編集]</a>
-            <a href="delete.php?id=<?= h($tweet['id']) ?>">[削除]</a>
+            <a href="edit.php?id=<?= h($tweets['id']) ?>">[編集]</a>
+            <a href="delete.php?id=<?= h($tweets['id']) ?>">[削除]</a>
             <hr>
         </li>
     </ul>

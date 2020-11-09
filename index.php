@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <form action="" method="post">
         <div>
             <label for="content">ツイート内容</label><br>
-            <textarea name="tweet" cols="30" rows="5"placeholder="いまどうしてる？"></textarea>
+            <textarea name="content" cols="30" rows="5"placeholder="いまどうしてる？"></textarea>
         </div>
         <div>
             <input type="submit" value="投稿する" >
@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <ul class = "tweet-list">
             <?php foreach ($tweets as $tweet) : ?>
                 <ul>
-                    <a href="show.php?id=<?= h($tweets['id']) ?>"><?= h($tweet['content']) ?></a><br>
+                    <a href="show.php?id=<?= h($tweet['id']) ?>"><?= h($tweet['content']) ?></a><br>
                     投稿日時:<?=h($tweet['created_at']) ?>
                 <?php if ($tweet['good']) : ?>   
                     <a href="good.php?id=<?= h($tweet['id']) ?>&good=0" class="good-list">★</a>

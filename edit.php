@@ -19,11 +19,11 @@ if (!$tweets){
 }
 
 if ($_SERVER['REQUEST_METHOD']=='POST'){
-    $content = $_POST['content']
+    $content = $_POST['content'];
     $errors = [];
 
     if ($content == '') {
-        $errors['content'] = 'ツイート内容が未入力です';
+        $errors['content'] = '内容が変更されていません。';
     }
 
     if (!$errors) {
@@ -54,20 +54,22 @@ if ($_SERVER['REQUEST_METHOD']=='POST'){
         <a href="index.php">戻る</a>
     </div>
     <?php if ($errors):?>
-        <ul class= "error-List">
-            <?php foreach ($errors as $error) : ?>
-                <li>
-                    <?= h($error) ?>
-                    </li>
-            <?php endforeach; ?>
+        <ul class= "error-list">
+            入力がされていません。
         </ul>
+        <?php elseif ($content == ''):?>
+            <ul class= "error-list">
+                    内容が変更されていません。
+            </ul>
+    <?php endif;?>
+
     <form action="" method="post">
         <div>
-            <label for="body">ツイート内容</label><br>
-            <textarea name="body" cols="30" rows="5"><?= h($tweets['content']) ?></textarea>
+            <label for="content">ツイート内容</label><br>
+            <textarea name="content" cols="30" rows="5"><?= h($tweets['content']) ?></textarea>
         </div>
         <div>
-            <input type="submit" value="編集する" placeholder="テストツイート">
+            <input type="submit" value="編集する">
         </div>
     </form>
 </body>
