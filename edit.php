@@ -11,9 +11,9 @@ $stmt = $dbh->prepare($sql);
 $stmt->bindParam(':id', $id, PDO::PARAM_INT);
 $stmt->execute();
 
-$tweets = $stmt->fetch(PDO::FETCH_ASSOC);
+$tweet = $stmt->fetch(PDO::FETCH_ASSOC);
 
-if (!$tweets){
+if (!$tweet){
     header('Location: index.php');
     exit;
 }
@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD']=='POST'){
         $errors['content'] = 'ツイート内容を入力して下さい';
     }
 
-    if ($tweets['content'] == $content) {
+    if ($tweet['content'] == $content) {
         $errors['content'] = '内容が変更されていません。';
     }
 
@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD']=='POST'){
         <a href="index.php">戻る</a>
     </div>
 
-        <?php if ($errors['content'] ) : ?>
+        <?php if ($errors) : ?>
         <ul class="error-list">
             <?php foreach ($errors as $error) : ?>
                 <li>
@@ -74,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD']=='POST'){
     <form action="" method="post">
         <div>
             <label for="content">ツイート内容</label><br>
-            <textarea name="content" cols="30" rows="5"><?= h($tweets['content']) ?></textarea>
+            <textarea name="content" cols="30" rows="5"><?= h($tweet['content']) ?></textarea>
         </div>
         <div>
             <input type="submit" value="編集する">

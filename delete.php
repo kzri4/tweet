@@ -11,9 +11,9 @@ $stmt = $dbh->prepare($sql);
 $stmt->bindParam(':id', $id, PDO::PARAM_INT);
 $stmt->execute();
 
-$tweets = $stmt->fetch();
+$tweet = $stmt->fetch();
 
-if (!$tweets) {
+if (!$tweet) {
     header('Location: index.php');
     exit;
 }

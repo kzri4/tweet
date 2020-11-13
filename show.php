@@ -11,9 +11,9 @@ $stmt = $dbh->prepare($sql);
 $stmt->bindParam(':id', $id, PDO::PARAM_INT);
 $stmt->execute();
 
-$tweets = $stmt->fetch(PDO::FETCH_ASSOC);
+$tweet = $stmt->fetch(PDO::FETCH_ASSOC);
 
-if (!$tweets) {
+if (!$tweet) {
     header('Location: index.php');
     exit;
 }
@@ -28,20 +28,20 @@ if (!$tweets) {
 </head>
 
 <body>
-    <h1><?= h($tweets['content']) ?></h1>
+    <h1><?= h($tweet['content']) ?></h1>
     <a href="index.php">戻る</a>
     <ul class="tweet-list">
         <li>
-            [#<?= h($tweets['id']) ?>]
-            <?= h($tweets['content']) ?><br>
-            投稿日時: <?= h($tweets['created_at']) ?>
-            <?php if ($tweets['good']) : ?>
-                <a href="good.php?id=<?= h($tweets['id']) ?>&good=0" class="good-list">★</a>
+            [#<?= h($tweet['id']) ?>]
+            <?= h($tweet['content']) ?><br>
+            投稿日時: <?= h($tweet['created_at']) ?>
+            <?php if ($tweet['good']) : ?>
+                <a href="good.php?id=<?= h($tweet['id']) ?>&good=0" class="good-list">★</a>
             <?php else : ?>
-                <a href="good.php?id=<?= h($tweets['id']) ?>&good=1" class="good-list">☆</a>
+                <a href="good.php?id=<?= h($tweet['id']) ?>&good=1" class="good-list">☆</a>
             <?php endif; ?>
-            <a href="edit.php?id=<?= h($tweets['id']) ?>">[編集]</a>
-            <a href="delete.php?id=<?= h($tweets['id']) ?>">[削除]</a>
+            <a href="edit.php?id=<?= h($tweet['id']) ?>">[編集]</a>
+            <a href="delete.php?id=<?= h($tweet['id']) ?>">[削除]</a>
             <hr>
         </li>
     </ul>

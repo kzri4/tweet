@@ -9,7 +9,7 @@ $sql = 'SELECT * FROM tweets order by created_at desc';
 $stmt = $dbh->prepare($sql);
 $stmt->execute();
 
-$tweets = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$tweet = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $content = $_POST['content'];
@@ -60,9 +60,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </form>
 
     <h2>Tweet一覧</h2>
-    <?php if ($tweets) : ?>
+    <?php if ($tweet) : ?>
         <ul class = "tweet-list">
-            <?php foreach ($tweets as $tweet) : ?>
+            <?php foreach ($tweet as $tweet) : ?>
                 <ul>
                     <a href="show.php?id=<?= h($tweet['id']) ?>"><?= h($tweet['content']) ?></a><br>
                     投稿日時:<?=h($tweet['created_at']) ?>
