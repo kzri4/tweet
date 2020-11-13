@@ -2,8 +2,11 @@
 
 .error-list {
     color: red;
+    list-style: none;
 }
 
-.good-list{
+.good-list {
     color: red;
+    list-style: none;
+    text-decoration: none;
 }

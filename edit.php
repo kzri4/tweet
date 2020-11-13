@@ -23,12 +23,19 @@ if ($_SERVER['REQUEST_METHOD']=='POST'){
     $errors = [];
 
     if ($content == '') {
+        $errors['content'] = 'ツイート内容を入力してください';
+    }
+
+    if ($tweets['content'] == $content) {
         $errors['content'] = '内容が変更されていません。';
     }
 
     if (!$errors) {
         $dbh = connectDb();
-        $sql = 'UPDATE tweets SET content = :content = :content WHERE id = :id';
+        $sql = 'UPDATE tweets SET 
+                content = :content,
+                created_at = CURRENT_TIMESTAMP 
+                WHERE id = :id';
         $stmt = $dbh->prepare($sql);
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->bindParam(':content', $content, PDO::PARAM_STR);
@@ -53,15 +60,16 @@ if ($_SERVER['REQUEST_METHOD']=='POST'){
     <div>
         <a href="index.php">戻る</a>
     </div>
-    <?php if ($errors):?>
-        <ul class= "error-list">
-            入力がされていません。
+
+        <?php if ($errors) : ?>
+        <ul class="error-list">
+            <?php foreach ($errors as $error) : ?>
+                <li>
+                    <?= h($error) ?>
+                </li>
+                <?php endforeach;?>
         </ul>
-        <?php elseif ($content == ''):?>
-            <ul class= "error-list">
-                    内容が変更されていません。
-            </ul>
-    <?php endif;?>
+        <?php endif; ?>
 
     <form action="" method="post">
         <div>
