@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD']=='POST'){
         <a href="index.php">戻る</a>
     </div>
 
-        <?php if ($errors) : ?>
+        <?php if ($errors['content'] ) : ?>
         <ul class="error-list">
             <?php foreach ($errors as $error) : ?>
                 <li>
