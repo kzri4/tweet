@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD']=='POST'){
     $errors = [];
 
     if ($content == '') {
-        $errors['content'] = 'ツイート内容を入力してください';
+        $errors['content'] = 'ツイート内容を入力して下さい';
     }
 
     if ($tweets['content'] == $content) {
