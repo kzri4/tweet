@@ -1,0 +1,12 @@
+@charset "utf-8";
+
+.error-list {
+    color: red;
+    list-style: none;
+}
+
+.good-list {
+    color: red;
+    list-style: none;
+    text-decoration: none;
+}
